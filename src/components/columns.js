@@ -1,15 +1,23 @@
 let columns = {}
 
-columns.infoColumns = [
+columns.tableColumns = [
     {
-        title: 'ID',
-        dataIndex: 'id',
-        key: 'id',
+        title: 'NO',
+        dataIndex: 'no',
+        key: 'no',
+        defaultSorterOrder: 'descend',
+        sorter: (a, b) => a.no - b.no,
       },
       {
-        title: 'PW',
-        dataIndex: 'pw',
-        key: 'pw',
+        title: 'TITLE',
+        dataIndex: 'title',
+        key: 'title',
+      },
+      {
+        title: 'DATE',
+        dataIndex: 'date',
+        key: 'date',
+        sorter: (a, b) => a.date - b.date,
       },
 ]
 

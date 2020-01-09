@@ -1,5 +1,9 @@
 import React, { Component } from "react";
+import { columns } from "./columns";
+import { Table, Input, Button, Icon } from "antd";
 import "antd/dist/antd.css";
+// 레이아웃 다 해보고 반응형 웹 디자인 해보기
+const { Search } = Input;
 
 class BojBoard extends Component {
     data = {
@@ -12,7 +16,6 @@ class BojBoard extends Component {
 
     componentDidMount() {
         this.setState({ nav: this.props.nav });
-        console.log("navIdx : " + this.data.navIdx);
     }
 
     // db fetch about navIdx
@@ -30,7 +33,19 @@ class BojBoard extends Component {
             <div>
                 {this.state.infoLoaded ? (
                     <div>
-                        <div className="BojBoard">BojBoard</div>
+                        <div style={{ marginBottom: 20 }}>
+                            <Search
+                                placeholder="input search problem"
+                                onSearch={val => console.log(val)}
+                                style ={{width: '50%'}}
+                            />
+                            <Button style={{float: 'right'}}> <Icon type="plus" /> </Button>
+                        </div>
+                        <div>
+                            <div className="BojBoard">
+                                <Table columns={columns.tableColumns} />
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     <div>empty</div>
