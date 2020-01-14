@@ -21,4 +21,10 @@ columns.tableColumns = [
       },
 ]
 
+columns.probOptions=[
+  {  label: 'BOJ', value: 1},
+  { label: 'SWEA', value:2},
+  { label:'Programmers', value:3},
+]
+
 export {columns}

@@ -10,3 +10,11 @@
   margin-bottom: 20px;
   margin-left: 95%;
 }
+
+#formContent {
+  padding: 1% 15%;
+}
+
+.addTextArea{
+  margin-bottom: 3%;
+}
