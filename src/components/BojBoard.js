@@ -1,18 +1,15 @@
 import React, { Component } from "react";
 import { columns } from "./columns";
 import { Table, Input, Button, Icon } from "antd";
-import "antd/dist/antd.css";
 import { AddForm } from "./AddForm";
-// 레이아웃 다 해보고 반응형 웹 디자인 해보기
+import "antd/dist/antd.css";
+
 const { Search } = Input;
 
 class BojBoard extends Component {
-  data = {
-    users: []
-  };
   state = {
     infoLoaded: true,
-    isAddClick: true, //for test
+    isAddClick: false, //for test
     nav: 1
   };
 

@@ -6,11 +6,17 @@ import "antd/dist/antd.css";
 
 class AddForm extends Component {
   data = {
-    users: []
+    type: 1,  // type of prob
+    no: 0,    // no of prob
+    url: '',  // url of prob
+    code: '', // code of prob
+    memo: '', // memo of prob
   };
   state = {
     infoLoaded: true,
-    radioValue: 1,
+    isAddClick: false,
+    isUpdated: false,
+    radioVal: 1,
   };
 
   onBackClick = e => {
@@ -18,13 +24,32 @@ class AddForm extends Component {
     this.props.onBackClick();
   };
 
+  onSaveClick = e => {
+    for(var key in this.data){
+      console.log(key,this.data[key])
+    }
+  }
+
   onRadioChange = e => {
-    console.log('radio val: ',e.target.value)
-    this.setState({radioValue: e.target.value})
+    this.data.type = e.target.value
+    this.setState({radioVal: e.target.value})
+  }
+
+  onInputChange = e => {
+    var val = e.target.value
+    switch(e.target.id) {
+      case 'no': this.data.no = val; break
+      case 'code': this.data.code = val; break
+      case 'memo': this.data.memo = val; break
+      case 'url': this.data.url=val; break
+      default: break
+    }
+    this.setState({isUpdated: true})
   }
 
   componentDidMount() {
     console.log("loaded add form");
+    this.data.type=1;
   }
 
   render() {
@@ -41,27 +66,27 @@ class AddForm extends Component {
         </div>
         <div className="AddForm">
             <div id='radioGroup'>
-                <center><Radio.Group options={columns.probOptions} onChange={this.onRadioChange} value={this.state.radioValue}> </Radio.Group></center>
+                <center><Radio.Group options={columns.probOptions} onChange={this.onRadioChange} value={this.state.radioVal}> </Radio.Group></center>
             </div>
             <div id='formContent'>
                 <Form layout="inline">
                     <Form.Item label="NO: ">
-                        <Input placeholder="input problem no"/>
+                        <Input id='no' onChange={this.onInputChange} placeholder="input problem no"/>
                     </Form.Item>
                     <Form.Item label="URL: " style={{float: 'right'}}>
-                        <Input style={{width: '500px'}}placeholder="input problem url"/>
+                        <Input id='url' onChange={this.onInputChange} style={{}}placeholder="input problem url"/>
                     </Form.Item>
                 </Form>
                 <hr></hr>
-                <div class='addTextArea'>
+                <div className='addTextArea'>
                     <p>CODE</p>
-                    <Input.TextArea rows={8}></Input.TextArea>
+                    <Input.TextArea id='code' onChange={this.onInputChange} rows={8}></Input.TextArea>
                 </div>
-                <div class='addTextArea'>
+                <div className='addTextArea'>
                     <p>MEMO</p>
-                    <Input.TextArea rows={8}></Input.TextArea>
+                    <Input.TextArea id='memo' onChange={this.onInputChange} rows={8}></Input.TextArea>
                 </div>
-                <center><Button>OK</Button></center>
+                <center><Button onClick={this.onSaveClick}>SAVE</Button></center>
             </div>
         </div>
       </div>

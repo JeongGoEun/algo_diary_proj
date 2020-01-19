@@ -1,43 +1,63 @@
 import React, { Component } from "react";
+import { columns } from "./columns";
+import { Table, Input, Button, Icon } from "antd";
 import "antd/dist/antd.css";
+import { AddForm } from "./AddForm";
+
+const { Search } = Input;
 
 class ProgBoard extends Component {
-    data = {
-        users: []
-    };
     state = {
         infoLoaded: true,
+        isAddClick: false, //for test
         nav: 1
-    };
-
-    componentDidMount() {
+      };
+    
+      componentDidMount() {
         this.setState({ nav: this.props.nav });
-        console.log("navIdx : " + this.data.navIdx);
-    }
-
-    // db fetch about navIdx
-    // getProbList(navIdx) {
-    //     fetch("/users")
-    //         .then(res => res.json())
-    //         .then(users => {
-    //             this.data.users = users
-    //             this.setState({ usersLoaded: true })
-    //         });
-    // }
-
-    render() {
+      }
+    
+      onPlusClick = e => {
+        this.setState({ isAddClick: !this.state.isAddClick });
+      };
+    
+      render() {
         return (
-            <div>
-                {this.state.infoLoaded ? (
-                    <div>
-                        <div className="ProgBoard">ProjBoard</div>
-                    </div>
-                ) : (
-                    <div>empty</div>
-                )}
-            </div>
+          <div>
+            {this.state.infoLoaded ? (
+              <div>
+                <div>
+                  <div className="BojBoard">
+                    {this.state.isAddClick ? (
+                      <AddForm onBackClick={this.onPlusClick} />
+                    ) : (
+                      <div>
+                        <div style={{ marginBottom: 20 }}>
+                          <Search
+                            placeholder="input search problem"
+                            onSearch={val => console.log(val)}
+                            style={{ width: "50%" }}
+                          />
+                          <Button
+                            onClick={this.onPlusClick}
+                            style={{ float: "right" }}
+                          >
+                            {" "}
+                            <Icon type="plus" />{" "}
+                          </Button>
+                        </div>
+                        <Table columns={columns.tableColumns} />
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div>empty</div>
+            )}
+          </div>
         );
-    }
+      }
 }
 
 export { ProgBoard };
