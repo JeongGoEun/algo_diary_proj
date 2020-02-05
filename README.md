@@ -2,7 +2,7 @@
 
 ## start
 ```
-npm install
+npm install && npm audit fix
 npm start
 ```
 
