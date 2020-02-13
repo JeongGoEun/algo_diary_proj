@@ -4,17 +4,32 @@ import { Table, Input, Button, Icon } from "antd";
 import { AddForm } from "./AddForm";
 import "antd/dist/antd.css";
 
+import * as util from '../util'
+
 const { Search } = Input;
 
 class BojBoard extends Component {
   state = {
     infoLoaded: true,
     isAddClick: false, //for test
-    nav: 1
+    nav: 1,
+    loading: false,
   };
+
+  data = {
+    items: []
+  }
 
   componentDidMount() {
     this.setState({ nav: this.props.nav });
+  }
+
+  componentWillMount() {
+    util.fetchUrl('http://localhost:3001/prob').then(res =>{
+      console.log(res)
+      this.data.items = res;
+      this.setState({loading: true});
+    })
   }
 
   onPlusClick = e => {
@@ -46,7 +61,7 @@ class BojBoard extends Component {
                         <Icon type="plus" />{" "}
                       </Button>
                     </div>
-                    <Table columns={columns.tableColumns} />
+                    <Table columns={columns.tableColumns} dataSource={this.data.items}/>
                   </div>
                 )}
               </div>

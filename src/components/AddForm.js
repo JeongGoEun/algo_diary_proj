@@ -6,8 +6,10 @@ import "antd/dist/antd.css";
 
 class AddForm extends Component {
   data = {
-    type: 1,  // type of prob
     no: 0,    // no of prob
+    type: 1,  // type of prob
+    title: '',  //title of prob
+    date: '', //date of prob
     url: '',  // url of prob
     code: '', // code of prob
     memo: '', // memo of prob
